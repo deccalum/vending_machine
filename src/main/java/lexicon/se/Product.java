@@ -6,7 +6,7 @@ public abstract class Product {
     private int id;
     private int quantity;
 
-    public Product(String name, double price, int id, int quantity) {
+    public Product(String name, int price, int id, int quantity) {
         this.name = name;
         this.price = price;
         this.id = id;
@@ -33,12 +33,16 @@ public abstract class Product {
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
+
+    String getDescription() {
+        return name + " (ID: " + id + ") - Price: " + price + ", Quantity: " + quantity;
+    }
 }
 
 class Snack extends Product {
     private int calories;
 
-    public Snack(String name, double price, int id, int quantity, int calories) {
+    public Snack(String name, int price, int id, int quantity, int calories) {
         super(name, price, id, quantity);
         this.calories = calories;
     }
@@ -51,7 +55,7 @@ class Snack extends Product {
 class Beverage extends Product {
     private int volume;
 
-    public Beverage(String name, double price, int id, int quantity, int volume) {
+    public Beverage(String name, int price, int id, int quantity, int volume) {
         super(name, price, id, quantity);
         this.volume = volume;
     }
@@ -64,7 +68,7 @@ class Beverage extends Product {
 class Fruit extends Product {
     private String origin;
 
-    public Fruit(String name, double price, int id, int quantity, String origin) {
+    public Fruit(String name, int price, int id, int quantity, String origin) {
         super(name, price, id, quantity);
         this.origin = origin;
     }

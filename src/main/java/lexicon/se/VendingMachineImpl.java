@@ -16,11 +16,11 @@ public class VendingMachineImpl implements IVendingMachine {
 
     // 0=name, 1=price, 2=id, 3=quantity, 4=calories/volume/origin (depending on product type)
     private void initializeProducts() {
-        products.add(new Snack("Chips", 15.0, 1, 10, 250));
-        products.add(new Snack("Chocolate Bar", 20.0, 2, 5, 300));
-        products.add(new Beverage("Soda", 25.0, 3, 8, 500));
-        products.add(new Beverage("Water", 10.0, 4, 15, 600));
-        products.add(new Fruit("Apple", 12.0, 5, 20, "USA"));
+        products.add(new Snack("Chips", 15, 1, 10, 250));
+        products.add(new Snack("Chocolate Bar", 20, 2, 3, 300));
+        products.add(new Beverage("Soda", 25, 3, 8, 500));
+        products.add(new Beverage("Water", 10, 4, 15, 600));
+        products.add(new Fruit("Apple", 12, 5, 20, "USA"));
     }
 
     @Override
@@ -37,10 +37,7 @@ public class VendingMachineImpl implements IVendingMachine {
     }
 
     @Override
-    public void purchaseProduct(int productId, int balance) {
-        if (balance < 0) {
-            throw new IllegalArgumentException("Insert coin.");
-        }
+    public Product purchaseProduct(int productId) {
         Product product = null;
         for (Product p : getProducts()) {
             if (p.getId() == productId) {
@@ -51,17 +48,20 @@ public class VendingMachineImpl implements IVendingMachine {
         if (product == null) {
             throw new IllegalArgumentException("Product not found.");
         }
-        if (product.getPrice() > balance) {
-            throw new IllegalArgumentException("Insufficient balance.");
-        }
         if (product.getQuantity() <= 0) {
             throw new IllegalArgumentException("Product out of stock.");
         }
 
-        // Update quantity
+        int price = (int) Math.round(product.getPrice());
+        if (this.balance < price) {
+            throw new IllegalArgumentException("Insufficient balance.");
+        }
+
+        // Update quantity and balance
         product.setQuantity(product.getQuantity() - 1);
-        // Deduct price from balance
-        this.balance -= product.getPrice();
+        this.balance -= price;
+
+        return product;
 
     }
 
