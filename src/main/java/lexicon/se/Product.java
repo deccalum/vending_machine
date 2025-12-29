@@ -1,12 +1,12 @@
 package lexicon.se;
 
 public abstract class Product {
+    private String id;
     private String name;
     private double price;
-    private int id;
     private int quantity;
 
-    public Product(String name, int price, int id, int quantity) {
+    public Product(String name, int price, String id, int quantity) {
         this.name = name;
         this.price = price;
         this.id = id;
@@ -21,7 +21,7 @@ public abstract class Product {
         return price;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
@@ -41,9 +41,12 @@ public abstract class Product {
 
 class Snack extends Product {
     private int calories;
+    
+    // tracks how many products of this type have been created
+    private static int idCounter = 1;
 
-    public Snack(String name, int price, int id, int quantity, int calories) {
-        super(name, price, id, quantity);
+    public Snack(String name, int price, int quantity, int calories) {
+        super(name, price, "A" + idCounter++, quantity);
         this.calories = calories;
     }
 
@@ -55,8 +58,11 @@ class Snack extends Product {
 class Beverage extends Product {
     private int volume;
 
-    public Beverage(String name, int price, int id, int quantity, int volume) {
-        super(name, price, id, quantity);
+    // tracks how many products of this type have been created
+    private static int idCounter = 1;
+
+    public Beverage(String name, int price, int quantity, int volume) {
+        super(name, price, "B" + idCounter++, quantity);
         this.volume = volume;
     }
 
@@ -68,8 +74,11 @@ class Beverage extends Product {
 class Fruit extends Product {
     private String origin;
 
-    public Fruit(String name, int price, int id, int quantity, String origin) {
-        super(name, price, id, quantity);
+    // tracks how many products of this type have been created
+    private static int idCounter = 1;
+
+    public Fruit(String name, int price, int quantity, String origin) {
+        super(name, price, "C" + idCounter++, quantity);
         this.origin = origin;
     }
 

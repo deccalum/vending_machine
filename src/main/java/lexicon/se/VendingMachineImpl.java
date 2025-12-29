@@ -14,13 +14,12 @@ public class VendingMachineImpl implements IVendingMachine {
         initializeProducts();
     }
 
-    // 0=name, 1=price, 2=id, 3=quantity, 4=calories/volume/origin (depending on product type)
     private void initializeProducts() {
-        products.add(new Snack("Chips", 15, 1, 10, 250));
-        products.add(new Snack("Chocolate Bar", 20, 2, 3, 300));
-        products.add(new Beverage("Soda", 25, 3, 8, 500));
-        products.add(new Beverage("Water", 10, 4, 15, 600));
-        products.add(new Fruit("Apple", 12, 5, 20, "USA"));
+        products.add(new Snack("Chips", 15, 10, 250));
+        products.add(new Snack("Chocolate Bar", 20, 3, 300));
+        products.add(new Beverage("Soda", 25, 8, 500));
+        products.add(new Beverage("Water", 10, 15, 600));
+        products.add(new Fruit("Apple", 12, 20, "USA"));
     }
 
     @Override
@@ -37,10 +36,10 @@ public class VendingMachineImpl implements IVendingMachine {
     }
 
     @Override
-    public Product purchaseProduct(int productId) {
+    public Product purchaseProduct(String productId) {
         Product product = null;
         for (Product p : getProducts()) {
-            if (p.getId() == productId) {
+            if (p.getId().equals(productId)) {
                 product = p;
                 break;
             }
