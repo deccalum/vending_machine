@@ -8,6 +8,7 @@ public interface IVendingMachine {
     int returnChange();
     List<Product> getProducts();
     Product purchaseProduct(String productId);
+    List<Integer> getAcceptedCoins();
 
 }
 

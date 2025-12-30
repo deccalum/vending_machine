@@ -1,8 +1,9 @@
 package lexicon.se;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 public class VendingMachineImpl implements IVendingMachine {
     private final List<Integer> acceptedCoins = Arrays.asList(1, 5, 10, 20, 50);
@@ -51,7 +52,7 @@ public class VendingMachineImpl implements IVendingMachine {
             throw new IllegalArgumentException("Product out of stock.");
         }
 
-        int price = (int) Math.round(product.getPrice());
+        int price = product.getPrice();
         if (this.balance < price) {
             throw new IllegalArgumentException("Insufficient balance.");
         }
@@ -73,7 +74,11 @@ public class VendingMachineImpl implements IVendingMachine {
 
     @Override
     public List<Product> getProducts() {
-        return products;
+        return Collections.unmodifiableList(products);
     }
 
+    @Override
+    public List<Integer> getAcceptedCoins() {
+        return acceptedCoins;
+    }
 }

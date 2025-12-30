@@ -3,7 +3,7 @@ package lexicon.se;
 public abstract class Product {
     private String id;
     private String name;
-    private double price;
+    private int price;
     private int quantity;
 
     public Product(String name, int price, String id, int quantity) {
@@ -17,7 +17,7 @@ public abstract class Product {
         return name;
     }
 
-    public double getPrice() {
+    public int getPrice() {
         return price;
     }
 
