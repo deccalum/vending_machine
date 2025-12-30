@@ -27,11 +27,19 @@ public class ConsoleUI {
             }
             
             if (input.equals("1") || input.equals("5") || input.equals("10") || input.equals("20") || input.equals("50")) {
-                vendingMachine.insertCoin(Integer.parseInt(input));
-                System.out.println("Inserted coin: " + input);
+                try {
+                    vendingMachine.insertCoin(Integer.parseInt(input));
+                    System.out.println("Inserted coin: " + input);
+                } catch (IllegalArgumentException e) {
+                    System.out.println(e.getMessage());
+                }
             } else {
-                Product purchased = vendingMachine.purchaseProduct(input);
-                System.out.println("Purchased: " + purchased.getName());
+                try {
+                    Product purchased = vendingMachine.purchaseProduct(input);
+                    System.out.println("Purchased: " + purchased.getName());
+                } catch (IllegalArgumentException e) {
+                    System.out.println(e.getMessage());
+                }
             }
         }
     }
